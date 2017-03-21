@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+	/*    步骤1  坑一个
+
+	var template  =  '我是一个葫芦娃,我的名字是{},衣服是白色,头发是黑色';
+	var string1  =  '我是一个葫芦娃,我的名字是鹿某,衣服是白色,头发是黑色';
+	var string2  =  '我是一个葫芦娃,我的名字是宋某,衣服是白色,头发是黑色';
+
+	// 只需要 进行 字符串的替换即可
+	var string3 =  template.replace('{}','宋小宝');
+	var string4 =  template.replace('{}','小沈阳');
+	var string5 =  template.replace('{}','赵四');
+	console.log(string3);
+	console.log(string4);
+	console.log(string5);
+	*/
+
+
+
+
+
+	/*
+		步骤2 坑多个 不考虑 顺序问题 都长得一样
+	*/
+	/*
+	// 准备一个对象
+	var obj = {
+		name:'黑猫警长',
+		like:'抓耗子',
+		color:'black'
+	}
+
+	var template = '我的名字是{},我的爱好是{},我头发的颜色是{}';
+
+	var string1 = template.replace("{}",obj.name);
+	 string1 = string1.replace("{}",obj.color);
+	 string1 = string1.replace("{}",obj.like);
+	console.log(string1);
+	*/
+
+
+	/*  步骤3  不一样的坑
+		使用正则 找到 有不同标示,但是却又有共同规则的坑
+	 */
+	/*
+	var obj = {
+		name:'黑猫警长',
+		like:'抓耗子',
+		color:'black'
+	}
+
+	var template = '我的名字是{name},我的爱好是{like},我头发的颜色是{color}';
+
+	// 坑的外观 {开始   中间是字母     }结束
+
+	// 定义正则的规则
+	// 开头是 {   中间是字母至少一个  结束是}
+	var reg = /{\w+}/;
+	// 找到了 {name}  数组 元素1是{name}
+	var result = reg.exec(template);
+
+	var replaceString =result[0];
+
+	var string = template.replace(replaceString,obj.name);
+	console.log(string);
+
+	var reg = /{\w+}/;
+	// 找到了 {name}  数组 元素1是{name}
+	var result = reg.exec(string);
+
+	var replaceString =result[0];
+
+	 string = string.replace(replaceString,obj.name);
+	console.log(string);
+
+	*/
+
+	/*
+		步骤4, 优化正则 让正则可以找到更多的内容
+		var reg = /{\w+}/;   {name}  {like}  还想找到 name 或者like
+	*/
+
+	var obj = {
+		name:'黑猫警长',
+		like:'抓耗子',
+		color:'black'
+	}
+
+	var template = '我的名字是{name},我的爱好是{like},我头发的颜色是{color}';
+
+	var reg = /{(\w+)}/;
+
+	// 正则对象验证 字符串
+	 var result =  reg.exec(template);
+	 console.log(result);
+
+	 // 替换的文本 {name}
+	 var replaceString = result[0];
+	 // 对象中的key name
+	 var key = result[1];
+
+	 var string = template.replace(replaceString,obj[key]);
+
+	 console.log('替换1:'+string)
+
+	 // 再次替换 已经替换了一个 
+	 // string = 我的名字是黑猫警长,我的爱好是{like},我头发的颜色是{color}
+	 var result = reg.exec(string);
+
+	 // 替换的文本 {like}
+	 var replaceString = result[0];
+	 // 对象中的key like
+	 var key = result[1];
+
+	 string = string.replace(replaceString,obj[key]);
+
+	 console.log('替换2:'+string)
+
+	  // 再次替换 已经替换了二个 
+	  // string =我的名字是黑猫警长,我的爱好是抓耗子,我头发的颜色是{color}
+	 var result = reg.exec(string);
+
+	 // 替换的文本 {like}
+	 var replaceString = result[0];
+	 // 对象中的key like
+	 var key = result[1];
+
+	 string = string.replace(replaceString,obj[key]);
+
+	 console.log('替换3:'+string)
+
+
+</script>

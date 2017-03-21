@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{	
+			/*  00 就是 ff */
+			border: 1px solid #0094ff;
+		}
+		.imageBox{
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+		}
+		.infoBox{
+			width: 300px;
+			height: 100px;
+			margin: 30px auto;
+		}
+		body{
+			text-align: center;
+		}
+		input{
+			margin: 0 30px;
+			width: 80px;
+			height: 40px;
+			border:none ;
+			background-color: hotpink;
+		}
+	</style>
+</head>
+<body>
+	<div class="imageBox"></div>
+	<div class="infoBox"></div>
+	<!-- 需要跟 服务端 切割完成之后的 数组的 索引值 相对应 -->
+	<input type="button" value='彭于晏' data-index='1'>
+	<input type="button" value='刘诗诗' data-index='2'>
+	<input type="button" value='王宝强' data-index='0'>
+</body>
+</html>
+<script type="text/javascript">
+	// 获取数组
+	var inputs = document.querySelectorAll('input');
+	// 循环 绑定 点击事件
+	for (var i = 0; i < inputs.length; i++) {
+		inputs[i].onclick =  function (){
+			var ajax = new XMLHttpRequest();
+
+			// 获取 当前点击按钮的 data-index
+			var currentIndex = this.dataset['index']
+
+			ajax.open('get','01.changeStar.php?index='+currentIndex);
+
+			ajax.send();
+
+			ajax.onreadystatechange = function(){
+				if (ajax.readyState==4&&ajax.status==200) {
+					// console.log(ajax.responseText);
+
+					// ajax.responseText
+					var backString = ajax.responseText;
+
+					// 切割{} 服务端专门添加的 分隔符
+					var infoArr = backString.split('{}');
+					console.log(infoArr);
+
+					// 数组的元素1 是图片路径
+					// 元素2 是描述信息
+					document.querySelector('.imageBox').style.background = 'url('+infoArr[0]+')no-repeat center/cover';
+
+					// 个性签名
+					document.querySelector('.infoBox').innerHTML = infoArr[1];
+
+				}
+			}
+		}
+	}
+</script>

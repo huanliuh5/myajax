@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{
+				transform: rotateX(100deg);
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li><a href="#">你好吗1</a></li>
+			<li><a href="#">你好吗2</a></li>
+			<li><a href="#">你好吗3</a></li>
+			<li><a href="#">你好吗4</a></li>
+			<li><a href="#">你好吗5</a></li>
+			<li><a href="#">你好吗6</a></li>
+			<li><a href="#">你好吗7</a></li>
+			<li><a href="#">你好吗8</a></li>
+			<li><a href="#">你好吗9</a></li>
+			<li><a href="#">你好吗10</a></li>
+		</ul>
+	</body>
+</html>
+<script>
+		document.querySelector('li').onclick = function(){
+			var ajax = new XMLHttpRequest();
+			
+			ajax.open();
+			ajax.send();
+			ajax.onreadystatechange = function(){
+				if(ajax.readyState==4&&ajax.status==200){
+					console.log(ajax.responseText);
+				}
+			}
+		}
+		
+		var reader = new FileReader();
+		
+	
+</script>

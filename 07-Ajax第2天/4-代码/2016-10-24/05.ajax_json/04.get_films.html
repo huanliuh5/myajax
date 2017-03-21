@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		table{
+			width: 500px;
+			margin: 0 auto;
+		}
+		td{
+			border: 1px solid hotpink;
+		}
+	</style>
+</head>
+<script type="text/javascript">
+window.onload = function () {
+	document.querySelector('#getFilms').onclick = function () {
+		var ajax = new XMLHttpRequest();
+
+		ajax.open('get','04.get_films.php');
+
+		ajax.send();
+
+		ajax.onreadystatechange = function () {
+			if (ajax.readyState==4&&ajax.status==200) {
+				console.log(ajax.responseText);
+
+				// string ---->obj
+				var filmObj = JSON.parse(ajax.responseText);
+				console.log(filmObj);
+
+				// 循环的时候 生成的是 tr 在开始之前 先把 table弄出来
+				var tableStr = "<table>";
+
+
+				// 该对象的结构为 最外层是对象 films 才是 数组
+				for (var i = 0; i < filmObj.films.length; i++) {
+					// 讲当前循环的对象保存起来
+					var currentObj = filmObj.films[i];
+
+					// 拼接字符串
+					tableStr+="<tr>";
+
+					// 一个一个的td
+					tableStr+='<td>'+currentObj.name+'</td>';
+					tableStr+='<td>得分:'+currentObj.score+'</td>';
+					tableStr+='<td><img src="'+currentObj.path+'"></td>';
+
+					tableStr+="</tr>";
+
+				}
+
+				// 讲table 的结束符号 拼接起来
+				 tableStr += "</table>";
+
+				 // 测试一下
+				 console.log(tableStr)
+
+				 // 添加到页面上
+				 document.body.innerHTML = tableStr;
+			}
+		}
+	}
+}
+</script>
+<body>
+	<h1>那些好看的电影们</h1>
+	<input type="button"  value="点我试试" id='getFilms'>
+</body>
+</html>

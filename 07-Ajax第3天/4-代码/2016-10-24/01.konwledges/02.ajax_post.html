@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>ajax发送post请求</h1>
+	<input type="button"  value="测试ajaxpost请求" id='btnAjax'>
+</body>
+</html>
+<script type="text/javascript">
+	document.querySelector('#btnAjax').onclick = function () {
+		var ajax = new XMLHttpRequest();
+
+		// 设置为post
+		ajax.open('post','02.ajax_post.php');
+
+		// 如果 想要使用post 发送数据给服务器 需要进行如下设置
+		ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		// 能够设置一些 自定义的 键值对 
+		ajax.setRequestHeader("heima","goodgoodstudy,daydayup");
+
+		// 格式 就是 key=value&key2=value2 的字符串
+		ajax.send('name=blackCat&skill=biubiubiu');
+
+		ajax.onreadystatechange = function () {
+			if (ajax.readyState==4&&ajax.status==200) {
+				console.log(ajax.responseText);
+			}
+		}
+	}
+</script>

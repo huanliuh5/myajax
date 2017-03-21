@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+	
+	// js中 数组的字面量表示法
+	var jsArr = [
+		{
+			name:'西葫芦炒牛肉',
+			skill:'萌萌哒'
+		},
+		{
+			name:'芹菜炒肉',
+			skill:'降血压'
+		}
+	]
+
+	// json 也能够标示数组
+	// json格式的      字符串 表示数组  最外层 使用的是 []  对象 依旧使用{}
+	var jsonArr  = '[{"name":"兰州拉面","skill":"饱了"},{"name":"疙瘩汤", "skill":"还想吃"}]';
+	console.log(jsonArr);
+
+	 var foodArr = JSON.parse(jsonArr);
+
+	 console.log(foodArr);
+</script>

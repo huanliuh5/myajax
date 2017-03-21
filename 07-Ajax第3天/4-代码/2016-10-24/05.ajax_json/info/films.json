@@ -1,0 +1,20 @@
+{
+	"films":
+		[
+			{
+				"name":"疯狂动物城",
+				"path":"img/dwc.jpg",
+				"score":10
+			},
+			{
+				"name":"三傻大闹宝莱坞",
+				"path":"img/threeidiots.jpg",
+				"score":10
+			},
+			{
+				"name":"这个杀手不太冷",
+				"path":"img/killerhot.jpg",
+				"score":9
+			}
+		]
+}

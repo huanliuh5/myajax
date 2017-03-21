@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>查看樱木花道</h1>
+	<input type="button"  value="点我试试" id='getSakula'>
+</body>
+</html>
+<script type="text/javascript">
+	document.querySelector('#getSakula').onclick = function () {
+		var ajax = new XMLHttpRequest();
+
+		ajax.open('post','02.get_sakula.php');
+
+		ajax.send();
+
+		// 注册事件
+		ajax.onreadystatechange = function () {
+			if (ajax.readyState==4&&ajax.status==200) {
+				console.log(ajax.responseText);
+
+				// string-obj
+				var obj = JSON.parse(ajax.responseText);
+				console.log(obj);
+
+				// 拼接出 一个ul
+				var str = '<ul>';
+
+				// 拼接 li标签
+				str+='<li>'+obj.name+'</li>';
+				str+='<li>'+obj.wife+'</li>';
+				str+='<li>'+obj.friend+'</li>';
+				str+='<li><img src="'+obj.path+'"></li>';
+
+				str += '</ul>';
+
+				// 使用 添加到界面上
+				document.body.innerHTML = str;
+			}
+		}
+	}
+
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>jq的ajax方法</h1>
+	<input type="button"  value="jqAjax方法" id='jqAjax'>
+</body>
+</html>
+<script type="text/javascript" src='js/jquery.min.js'></script>
+<script type="text/javascript">
+	$(function () {
+		$("#jqAjax").on('click',function(){
+			
+			// 演示 jq的Ajax方法
+			// 一定要传递的东西
+			/*	默认使用的是get方法
+				url:请求的地址 
+				type:默认是get 可以设置为post
+				data:发送的数据 支持直接写对象
+				dataType:如果设置为json 返回的内容不是json 也是不会 触发请求成功的回调事件的
+				success:请求成功的回调时间
+
+			*/
+			$.ajax({
+				url:"03.jq_ajax.php",
+				type:'post',
+				data:{
+					name:'西葫芦牛肉羹',
+					skill:'感觉身体棒棒哒'
+				},
+				dataType:'json',
+				success:function(backData){
+					console.log(backData);
+				}
+			})
+		})
+	})
+</script>

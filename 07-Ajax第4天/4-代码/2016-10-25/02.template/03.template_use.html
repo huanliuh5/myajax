@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>正常用法</h1>
+	<input type="button"  value="正常使用"  id='useTemplate'>
+</body>
+</html>
+<script type="text/javascript" src='my_template.js'></script>
+<!-- 写了type 是指定 解析的方式  不写type 默认也是js 
+	如果 想要在 script标签中 页面上看不到的文本 可以 为type随机赋值
+-->
+<script type="text/template" id='template01'>
+	<ul>
+		<li>{name}</li>
+		<li>{age}</li>
+		<li>{skill}</li>
+	</ul>
+</script>
+<script type="text/javascript">
+	// 获取  type 不为 javascript的script标签
+	var domObj = document.querySelector("#template01");
+	// console.log(domObj);
+
+	var templateStr = domObj.innerHTML;
+	console.log(templateStr);
+
+	// 对象
+	var obj  ={
+		name:"柯南",
+		age:'18',
+		skill:"长生不老"
+
+	}
+	// 调用模板方法
+	var resultStr = my_template(templateStr,obj);
+	document.body.innerHTML = resultStr;
+</script>

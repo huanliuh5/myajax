@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>验证用户名是否存在</h1>
+	<!-- form表单中 name属性 才是必须的 ajax 可以自己手动拼接 -->
+	<input type="text"  placeholder="请输入用户名" id='nameText'>
+</body>
+</html>
+<script type="text/javascript">
+	/*	需求
+		在失去焦点的时候 
+			用ajax验证 五部曲
+	*/
+	// 为元素 绑定 失去焦点事件 
+	document.querySelector("#nameText").onblur = function () {
+		// 失去焦点事件中 发送ajax请求
+
+		// 1.创建
+		var ajax = new XMLHttpRequest();
+
+		// 2.设置
+		var url ='01.inputName.php';
+		url+='?userName=';	
+		// 通过this 获取当前这个文本框的value值
+		url+= this.value; //01.inputName.php?userName=fox;
+
+
+		ajax.open('get',url);
+
+		// 3.发送
+		ajax.send();
+
+		// 4.注册事件
+		ajax.onreadystatechange = function () {
+			// 5.判断并使用
+			if (ajax.readyState ==4 && ajax.status==200) {
+				// console.log(ajax.responseText);
+
+				// 根据不同的结果 弹出提示框 提示用户
+				if (ajax.responseText == 'you can use') {
+					alert('恭喜你,可以使用的用户名')
+				}else{
+					alert('哎呀,真抱歉,请重新想一个吧^_^');
+				}
+			}
+		}
+	}
+	
+</script>

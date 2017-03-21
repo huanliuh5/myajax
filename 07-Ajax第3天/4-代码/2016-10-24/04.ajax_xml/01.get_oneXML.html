@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>`</title>
+</head>
+<body>
+	<h1>测试获取xml</h1>
+	<input type="button"  value="获取xml数据" id='getXML'>
+</body>
+</html>
+<script type="text/javascript">
+	document.querySelector("#getXML").onclick = function () {
+		var ajax = new XMLHttpRequest();
+
+		ajax.open('post','01.get_oneXML.php');
+
+		// 如果 使用post的时候 不发送任何的数据,那么 下列代码可以不写 
+		// ajaxName.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+		 ajax.send();
+
+		 ajax.onreadystatechange = function () {
+		 	if (ajax.readyState==4&&ajax.status==200) {
+		 		// 就算服务端返回的是xml数据 ,但是 ajax.responseText中也是能够获取道字符串的 
+		 		// 注意:不要直接去处理字符串,劳民伤财
+		 		// console.log(ajax.responseText);
+
+		 		// 获取返回的xml数据
+		 		// console.log(ajax.responseXML.querySelector('wife').innerHTML);
+
+		 		// 打印页面中 已有的document对象
+		 		// console.log(document.querySelector('h1'));
+
+		 		// 一步一步的剥离周杰伦的信息
+		 		var ajaxDocument = ajax.responseXML;
+
+		 		// 获取名字
+		 		console.log(ajaxDocument.querySelector('name'));
+		 		console.log(ajaxDocument.querySelector('wife'));
+		 		console.log(ajaxDocument.querySelector('friend'));
+		 		// console.log(ajaxDocument.querySelector('name'));
+
+		 		// 创建ul
+		 		var ulDom = document.createElement('ul');
+
+		 		// 创建li
+		 		var liDom1 = document.createElement('li');
+		 		var liDom2 = document.createElement('li');
+		 		var liDom3 = document.createElement('li');
+
+		 		// 设置li的内容
+		 		liDom1.innerHTML = ajaxDocument.querySelector('name').innerHTML;
+		 		liDom2.innerHTML = ajaxDocument.querySelector('wife').innerHTML;
+		 		liDom3.innerHTML = ajaxDocument.querySelector('friend').innerHTML;
+
+		 		// 添加到ul中
+		 		ulDom.appendChild(liDom1);
+		 		ulDom.appendChild(liDom2);
+		 		ulDom.appendChild(liDom3);
+
+		 		// ul 添加到页面上
+		 		document.body.appendChild(ulDom);
+		 	}
+		 }
+	}
+</script>

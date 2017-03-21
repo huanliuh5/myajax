@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src='../js/jquery-3.0.0.min.js'></script>
+	<script type="text/javascript">
+		$(function () {
+			$('input').click(function () {
+				//  
+				$.ajax({
+					url:"http://192.168.37.123/2016-9-8/03.jsonP/text.php",
+					dataType:'jsonP',
+					success:function (data) {
+						console.log(data);
+					}
+				})
+			})
+		})
+	</script>
+</head>
+<body>
+	<input type="button" value='jq发送跨域请求'>
+</body>
+</html>

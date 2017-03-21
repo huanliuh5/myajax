@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<!-- 导入js  -->
+<script type="text/javascript" src='js/template-native.js'></script>
+
+<!-- 定义模板 -->
+<script type="text/template" id='template01'>
+	<ul>
+		<li><%=food%></li>
+		<li><%=color%></li>
+		<li><%=friend%></li>
+		<li>
+			<ul>
+				<% for(var i =0;i<vegetable.length;i++) { %>
+					<li><%=vegetable[i]%></li>
+				<% } %>
+			</ul>
+		</li>
+	</ul>
+</script>
+
+<!-- 自己的js代码 -->
+<script type="text/javascript">
+
+	// 定义对象
+	var  obj = {
+		food:'臭豆腐',
+		color:'黑色',
+		friend:'辣子鸡',
+		vegetable:['香菜','小葱','辣椒','大蒜','芥末']
+	};
+
+	// 调用模板引擎 为我们提供的方法
+	/*
+		参数1:模板的id
+		参数2:想要使用的对象
+	*/
+	var resultStr = template('template01',obj);
+	console.log(resultStr);
+</script>

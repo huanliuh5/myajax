@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<!-- 引入 自己封装的 模板工具函数 -->
+<script type="text/javascript" src='my_template.js'></script>
+
+<script type="text/javascript">
+	// 模板字符串
+	var templateString = '我是一匹来自{direction}的{name},我没事喜欢{like},我有一个好朋友他叫{friend}';
+
+	// 对象
+	var obj = {
+		direction:"北方",
+		name:'哈士奇',
+		like:"冻成狗",
+		friend:'阿拉斯加'
+	}
+
+	// 调用即可
+	/*
+		参数1:模板字符串
+		参数2:对象
+	*/
+	var resultStr = my_template(templateString,obj);
+	console.log('获取的返回值:'+resultStr);
+</script>

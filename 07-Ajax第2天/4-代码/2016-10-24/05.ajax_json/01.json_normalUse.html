@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+	// 字面量标示法 创建一个 js对象
+	var jsObj = {
+		name:"黑崎一护",
+		skill:"写轮眼",
+		friend:"葫芦娃"
+	};
+
+	// 创建一个    json格式    的     字符串
+	var jsonString = '{"name":"路飞","skill":"橡胶机关枪","friend":"索隆"}';
+	console.log(jsonString);
+
+	// json格式的字符串 用的时候 会先进行转化  string->obj
+	var jsonObj = JSON.parse(jsonString);
+	console.log(jsonObj);
+	console.log(jsonObj.name);
+	console.log(jsonObj.skill);
+	console.log(jsonObj.friend);
+
+
+
+</script>

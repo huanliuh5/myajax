@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style type="text/css">
+	.item {
+		width: 640px;
+		/* height: 452px; */
+		background-color: #eee;
+		margin-top: 50px;
+		border-radius: 5px;
+		overflow: hidden;
+	}
+	
+	.item .cover {
+		display: block;
+	}
+	
+	.item .cover img {
+		display: block;
+	}
+	
+	.item .bottom {
+		height: 35px;
+		position: relative;
+	}
+	
+	.item .bottom a {
+		text-decoration: none;
+		line-height: 35px;
+		font-family: '微软雅黑';
+		margin-left: 20px;
+		color: gray;
+	}
+	
+	.item .bottom .rightBox {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		height: 100%;
+	}
+	
+	.item .bottom .rightBox span {
+		line-height: 35px;
+		margin: 0 20px;
+		font-size: 15px;
+		/* font-family: "微软雅黑"; */
+		color: gray;
+	}
+	
+	.item .bottom .rightBox span::before {
+		margin-right: 10px;
+		color: #dd5a64;
+	}
+	
+	.getMore {
+		width: 100px;
+		height: 100px;
+		border: none;
+		background-color: skyblue;
+		position: fixed;
+		right: 100px;
+		top: 50%;
+		margin-top: -50px;
+	}
+	</style>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+</head>
+
+<body>
+	<input type="button" 	 value="获取所有数据" id='getData'>
+</body>
+
+</html>
+
+<!-- 导入 artTemplate 模板引擎 -->
+<script type="text/javascript" src='js/template-native.js'></script>
+
+<!-- 导入 自己封装的ajax 工具函数 -->
+<script type="text/javascript" src='js/01.ajax_tool.js'></script>
+
+<!-- 定义模板 -->
+<script type="text/heima" id='template01'>
+<% for(var i=0;i<infos.length;i++){%>
+	<div class="item">
+		<a href="#" class='cover'><img src="<%=infos[i].path%>" alt=""></a>
+		<div class="bottom">
+			<a href="#"><%=infos[i].name%></a>
+			<div class='rightBox'>
+				<span class='icon-heart'><%=infos[i].st[ar%></span>
+				<span class='icon-comment'><%=infos[i].message%></span>
+			</div>
+		</div>
+	</div>
+<%}%>	
+</script>
+
+<script type="text/javascript" >
+	document.querySelector("#getData").onclick = function () {
+		// 通过ajax 从服务器 获取数据
+		// 使用 自己封装 ajax 工具函数
+		my_$.ajax_total({
+			method:'get',
+			data:false,
+			url:'02.getDatas.php',
+			success:function(backData){
+				// console.log(backData);
+
+				// 把 json格式的 字符串 转化为 对应的js对象
+				var jsArr = JSON.parse(backData);
+				// console.log(jsArr);
+
+				// 将 数组 包装到 一个对象中 为了我们使用方便
+				// jsArr 是一个数组 我希望传递进去的时候
+				/*
+					var dataObj  ={
+						infos:[]
+					}
+					<%  for(var i=0;i<infos.length;i++){} %>
+				*/
+				var dataObj = {
+					infos:jsArr 
+				};
+
+				// console.log(dataObj);
+
+				// 对象 有了  ,模板 有了  调用方法即可
+				var resultStr = template('template01',dataObj)
+
+				console.log(resultStr);
+
+				// 添加到页面上
+				document.body.innerHTML = resultStr;
+				
+			}
+		})
+	}
+
+</script>

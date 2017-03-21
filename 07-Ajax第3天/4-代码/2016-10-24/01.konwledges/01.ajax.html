@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>复习ajax五部曲</h1>
+	<input type="button"  value="发送ajax请求" id='btnAjax'>
+</body>
+</html>
+<script type="text/javascript">
+	document.querySelector('#btnAjax').onclick = function (){
+		// 1.创建异步对象
+		var ajaxObj = new XMLHttpRequest();
+		console.log(ajaxObj.readyState);
+
+		// 2.设置method url
+		ajaxObj.open('get','01.ajax.php?name=jack&age=18');
+		console.log(ajaxObj.readyState);
+		// 3.发送请求
+		ajaxObj.send();
+		console.log(ajaxObj.readyState);
+
+		// 4.注册回调函数
+		ajaxObj.onreadystatechange = function () {
+			console.log(ajaxObj.readyState);
+			// 5.判断状态 并使用获取的数据
+			if (ajaxObj.readyState==4&&ajaxObj.status==200) {
+				console.log(ajaxObj.responseText);
+			}
+		}
+
+
+		
+	}
+</script>

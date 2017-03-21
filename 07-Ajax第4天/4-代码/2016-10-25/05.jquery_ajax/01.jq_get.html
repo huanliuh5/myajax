@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="jQuery_get请求" id='jq_get'>
+</body>
+</html>
+<!-- 导入jquery -->
+<script type="text/javascript" src='js/jquery.min.js'></script>
+
+<script type="text/javascript">
+	$(function(){
+		// jq绑定点击事件
+		$('#jq_get').click(function () {
+			// jq发送get请求
+			/*
+				参数1:url
+				参数2:传递的数据,支持直接写一个对象
+				参数3:请求成功之后的回调函数
+			*/
+			$.get('01.jq_get.php',{name:'jack',age:18},function(backData){
+				console.log('123');
+				console.log(backData);
+			},'json');
+		})
+	})
+</script>

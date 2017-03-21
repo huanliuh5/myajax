@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>jq的post方法</h1>
+	<input type="button"  value="jqPost方法" id='jqPost'>
+</body>
+</html>
+<script type="text/javascript" src='js/jquery.min.js'></script>
+<script type="text/javascript">
+	$(function () {
+		$("#jqPost").on('click',function(){
+			// jqajax发送post
+			$.post('02.jq_post.php',{name:'蒜蓉西兰花',color:'green'},function(backData){
+				console.log(backData);
+			});
+		})
+	})
+</script>

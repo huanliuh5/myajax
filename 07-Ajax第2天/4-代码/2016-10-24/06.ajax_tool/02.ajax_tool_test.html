@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button"  value='测试工具函数' id='testTool'>
+</body>
+</html>
+<script type="text/javascript" src='01.ajax_tool_steps.js'></script>
+<script type="text/javascript">
+	document.querySelector('#testTool').onclick = function () {
+		// 调用工具函数即可
+		/*
+			参数1:请求的方法
+			参数2:发送的数据
+			参数3:请求的url
+		*/
+		// 无参数 get方法 通过
+		// ajax_total('get',false,'02.ajax_get.php');
+		// 有参数 get方法 通过
+		// ajax_total('get','name=jack&wife=rose','02.ajax_get.php');
+
+		// 无参数 post方法 通过
+		// ajax_total('post',false,'02.ajax_post.php');
+
+		// 有参数 post 通过
+		// ajax_total('post','age=18&friend=西兰花','02.ajax_post.php');
+
+
+		// 测试回调函数
+		ajax_total('get','name=jack','02.ajax_get.php',function(backData){
+			console.log('匿名函数被调用了');
+			console.log(backData);
+		})
+	}
+</script>

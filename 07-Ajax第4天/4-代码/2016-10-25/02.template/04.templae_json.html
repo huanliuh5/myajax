@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<input type="button" value="点击获取json数据" id='getJSON'>
+</body>
+
+</html>
+<!-- 导入js 模板js-->
+<script type="text/javascript" src='my_template.js'></script>
+<!-- ajax工具函数 -->
+<script type="text/javascript" src='01.ajax_tool.js'></script>
+
+<!-- 定义模板 -->
+<script type="text/template" id='template01'>
+	<tr>
+		<td>{name}</td>
+		<td>{score}</td>
+		<td><img src="{path}" alt=""></td>
+		<td><a href="#">点击查看更多关于{name}的信息</a></td>
+	</tr>
+</script>
+<script type="text/javascript">
+	// 为按钮 绑定点击事件 发送ajax请求
+	document.querySelector('#getJSON').onclick = function () {
+		// 获取json数据
+		my_$.ajax_total({
+			url:'04.template_json.php',
+			data:false,
+			method:'get',
+			success:function(backData){
+				// console.log(backData);
+
+				// 转化为 js对象
+				var jsObj = JSON.parse(backData);
+				// console.log(jsObj);
+
+				// 准备一个table
+				var str ='<table>';
+
+				for (var i = 0; i < jsObj.films.length; i++) {
+					// 保存为一个局部变量
+					var currentObj = jsObj.films[i];
+
+					// 获取模板
+					var templateStr = document.querySelector("#template01").innerHTML;
+
+					// 调用模板工具函数
+					var resultStr = my_template(templateStr,currentObj);
+
+					// 获取返回的 替换完毕的 字符串
+					console.log(resultStr);
+
+					// 每次循环一次 都把table字符串添加内容
+					str+=resultStr;
+				}
+
+				str+='</table>'
+
+				// 拼接完毕 使用接口
+				document.body.innerHTML = str;
+			}
+		})
+	}
+
+</script>

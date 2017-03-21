@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<!-- 浏览器中 对于 标签的 src属性 没有同源的限制 -->
+<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1906585162,443792370&fm=58" alt="">
+
+<!-- jsonP 就是 使用 script 标签 的 src属性 去发送请求 获取数据 -->
+
+<script type="text/javascript" src='../js/fox_template.js'></script>
+
+<script type="text/javascript">
+	function sayHi(data) {
+		alert('感觉天气棒棒哒'+data);
+	}
+</script>
+<script type="text/javascript" src='text.php?callBack=sayHi'></script>
+</body>
+</html>

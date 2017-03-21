@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		form{
+			width: 400px;
+			border: 1px solid #0094ff;
+			margin: 0 auto
+		}
+		input{
+			width: 100%;
+		}
+		h1{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>通过get提交数据</h1>
+	<!-- 
+		action设置提交的页面 这里我们写的是 php文件
+	 -->
+	<form action="01.form_get.php">
+		<!-- 表单元素 -->
+		<input type="text"  name='name' placeholder="请输入用户名">
+		<input type="password" name='pass' placeholder="请输入密码">
+		<input type="submit">
+	</form>
+</body>
+</html>

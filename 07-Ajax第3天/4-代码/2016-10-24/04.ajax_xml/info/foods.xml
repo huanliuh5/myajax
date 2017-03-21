@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foods>
+	<food>
+		<name>西兰花炒蛋</name>
+		<color>yellowgreen</color>
+		<path>imgs/xlhcd.jpg</path>
+		<price>30元</price>
+	</food>
+	<food>
+		<name>西红柿炒蛋</name>
+		<color>redyellow</color>
+		<path>imgs/xhscd.jpg</path>
+		<price>50元</price>
+	</food>
+	<food>
+		<name>洋葱炒蛋</name>
+		<color>brown</color>
+		<path>imgs/yccd.jpg</path>
+		<price>100元</price>
+	</food>
+</foods>

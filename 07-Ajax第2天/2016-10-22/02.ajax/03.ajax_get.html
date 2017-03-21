@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>ajax_get提交数据</h1>
+	<input type="button"  value="ajaxGet提交数据" id='btnAjax'>
+</body>
+</html>
+<script type="text/javascript">
+	// 绑定点击事件
+	document.querySelector("#btnAjax").onclick = function () {
+		// 1.创建异步对象
+		var ajax = new XMLHttpRequest();
+
+		// 2.设置url 以及方法
+		// ajax 通过get发送数据给服务器 需要自己在url的后面 手动拼接 数据内容
+		ajax.open('get','03.ajax_get.php?name=jack');
+
+		// 3.发送请求
+		ajax.send();
+
+		// 4.注册回调函数 
+		ajax.onreadystatechange = function () {
+			// 5.判断状态 并且使用服务器响应的数据}
+			if (ajax.readyState ==4 && ajax.status==200) {
+				console.log(ajax.responseText);
+				
+
+				//  修改页面的显示内容
+				// document.querySelector("h1").innerHTML = ajax.responseText;
+			}
+		}
+
+	}
+</script>

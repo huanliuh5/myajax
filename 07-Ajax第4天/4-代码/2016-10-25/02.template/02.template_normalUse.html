@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>测试模板工具函数基本使用</h1>
+	<input type="button"  value="测试使用"  id='useTemplate'>
+</body>
+</html>
+<script type="text/javascript" src='my_template.js'></script>
+<!-- 自己的js代码 -->
+<script type="text/javascript">
+	// 绑定点击事件
+	document.querySelector("#useTemplate").onclick = function (){
+		// 准备模板
+		var templaeStr = '<ul><li>姓名:{name}</li><li>年龄:{age}</li><li>技能:{skill}</li></ul>';
+
+		// 准备对象
+		var obj = {
+			name:'蜡笔小新',
+			age:'5',
+			skill:'动感光波,biubiubiu'
+		};
+
+		// 调用 ->替换完成的字符串
+		var resultStr = my_template(templaeStr,obj);
+
+		// 在适当的时候 使用这个字符串
+		console.log(resultStr);
+
+		// 在适当的地方使用
+		document.body.innerHTML =resultStr;
+	}
+</script>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		html,body{
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			height: 100%;
+			width: 70%;
+			margin: 0 auto;
+			border: 1px solid #0094ff;
+			/* 弹性 */
+			display: flex;
+			/* 设置方向 */
+			flex-direction: column;
+		}
+		.messageBox{
+			background-color: skyblue;
+			flex: 4;
+		}
+		.inputBox{
+			background-color: pink;
+			flex: 1;
+			display: flex;
+			width: 100%;
+		}
+		.inputBox input{
+			display: block;
+		}
+		.inputBox input:first-child{
+			/* flex: 4; */
+			width: 80%;
+			font-size: 50px;
+		}
+		.inputBox input:last-child{
+			/* flex: 1; */
+			width: 20%;
+		}
+
+		/* 为 自己 以及 回答的div 添加样式 */
+		.self{
+			background-color: yellow;
+			color: red;
+		}
+		.robot{
+			background-color: orange;
+			color: green;
+			text-align: right;
+		}
+		.messageBox{
+			overflow: scroll;
+		}
+	</style>
+</head>
+<body>
+<h1>服务端使用的是代码跟数据分离的写法</h1>
+	<div class="container">
+		<div class="messageBox"></div>
+		<div class="inputBox">
+			<input type="text" id='textInput'>
+			<input type="button" id='ajaxInput' value='发送'>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	document.querySelector("#ajaxInput").onclick = function () {
+		var ajax = new XMLHttpRequest();
+
+		ajax.open('post','02.chat.php');
+
+		// 设置 请求报文中 content-type的值
+		ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+
+		// 发送数据给服务器
+		ajax.send('message='+document.querySelector('#textInput').value);
+
+
+		// 在数据回来之前,先把自己输入的内容 弄成一个div 添加到页面上
+		var myBox = document.createElement('div');
+		// 添加class
+		myBox.className ='self';
+
+		// 获取输入的内容
+		var inputText = document.querySelector('#textInput').value;
+
+		myBox.innerHTML = inputText;
+
+		// 添加到页面
+		document.querySelector('.messageBox').appendChild(myBox);
+
+		ajax.onreadystatechange = function () {
+			if (ajax.readyState ==4&&ajax.status==200) {
+				console.log(ajax.responseText);
+
+				// 获取到了服务端的数据之后 创建另外的一个盒子
+				var robotBox = document.createElement('div');
+
+				robotBox.className = 'robot';
+
+				robotBox.innerHTML = ajax.responseText;
+
+				document.querySelector('.messageBox').appendChild(robotBox);
+			}
+		}
+	}
+</script>

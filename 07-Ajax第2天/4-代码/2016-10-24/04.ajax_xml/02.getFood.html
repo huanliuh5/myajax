@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		table{
+			width: 500px;
+			margin: 0 auto;
+		}
+		td{
+			border: 1px solid #0094ff;
+		}
+	</style>
+</head>
+<body>
+	<h1>获取食物</h1>
+	<input type="button"  value="获取很多食物" id='getFood'>
+</body>
+</html>
+<script type="text/javascript">
+	document.querySelector('#getFood').onclick = function () {
+		var ajax = new XMLHttpRequest();
+
+		ajax.open('get','02.getFood.php');
+
+		ajax.send();
+
+		ajax.onreadystatechange = function () {
+			if (ajax.readyState==4&&ajax.status==200) {
+				// console.log(ajax.responseText);
+
+				console.log(ajax.responseXML);
+
+				// document.createElement('table');
+
+				// 保存获取的 document对象
+				var ajaxDocument = ajax.responseXML;
+
+				// 字符串 拼接table
+				var str ='<table>';
+
+				// 在中间 去拼接 我们的 那些个 tr
+				 var foods = ajaxDocument.querySelectorAll('food');
+
+				 // 循环 拼接
+				 for (var i = 0; i < foods.length; i++) {
+				 	str+='<tr>';
+				 	str+='<td>'+foods[i].querySelector('name').innerHTML+'</td>';
+				 	str+='<td>'+foods[i].querySelector('color').innerHTML+'</td>';
+				 	// str+='<td><img src="imgs/xlhcd.jpg"></td>';
+				 	str+='<td><img src="'+foods[i].querySelector('path').innerHTML+'"></td>';
+				 	str+='<td>'+foods[i].querySelector('price').innerHTML+'</td>';
+				 	str+='</tr>'
+				 }
+
+
+
+				str+='</table>';
+
+
+				// 到这里 应该是拼接完毕的 字符串
+
+				console.log(str);
+
+				// 直接替换到body中
+				document.body.innerHTML = str;
+			}
+		}
+	}
+</script>
